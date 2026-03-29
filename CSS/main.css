@@ -5,12 +5,48 @@
     font-family: Arial, sans-serif;
 }
 
+:root {
+  --bg-start: #0a2138;
+  --bg-mid: #123b5d;
+  --bg-end: #1f5778;
+
+  --text-main: #e6f2ff;
+  --text-secondary: #b8d4ec;
+
+  --accent: #f6c177;       /* мягкое золото */
+  --accent-hover: #7fd4ff; /* голубой hover */
+}
+
+body {
+    padding-top: 80px; 
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at 12% 18%, rgba(102, 204, 255, 0.22), transparent 44%),
+        radial-gradient(circle at 84% 76%, rgba(255, 179, 94, 0.3), transparent 46%),
+        linear-gradient(140deg, var(--bg-start) 0%, var(--bg-mid) 48%, var(--bg-end) 100%);
+}
+
 .header {
     display: flex;
-    align-items: center; /* выравнивание по вертикали */
+    align-items: center;
     gap: 15px;
-    background: #000;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
     padding: 15px 30px;
+    padding-right: 70px;
+    border-radius: 0 0 20px 20px;
+
+    background: rgba(5, 17, 29, 0.6); /* вместо черного */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    z-index: 1000;
 }
 
 .logo-img {
@@ -20,29 +56,28 @@
 
 .logo-text {
     display: flex;
-    flex-direction: column; /* ВАЖНО: текст в колонку */
+    flex-direction: column;
 }
 
 .logo {
-    color: #FFD700;
+    color: var(--accent);
     font-size: 15px;
     font-weight: bold;
-    letter-spacing: 0px;
 }
 
 .sub-logo {
-    color: #fff09c;
+    color: var(--text-secondary);
     font-size: 14px;
-    margin-top: 3px;
 }
 
 nav {
     display: flex;
     gap: 25px;
+    margin-left: auto; 
 }
 
 nav a {
-    color: #ffffff;
+    color: var(--text-main);
     text-decoration: none;
     font-size: 16px;
     transition: 0.3s;
@@ -54,16 +89,76 @@ nav a::after {
     position: absolute;
     width: 0%;
     height: 2px;
-    background: #FFD700;
-    left: 0;
-    bottom: -5px;
-    transition: 0.3s;
-}
 
-nav a:hover {
-    color: #FFD700;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--accent),
+        var(--accent-hover),
+        transparent
+    );
+
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
 }
 
 nav a:hover::after {
     width: 100%;
+}
+
+nav a:hover {
+    color: var(--accent);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    padding: 100px 100px;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.hero-text h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+}
+
+.hero-image img {
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+}
+
+.hero-image img {
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
 }
