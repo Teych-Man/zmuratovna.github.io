@@ -38,10 +38,6 @@
             <h1>English Language. Collection of Didactic Materials for 1st-year Students</h1>
     
             <p>
-                Дисциплина: ООД4. Английский язык. 1 курсы
-            </p>
-    
-            <p>
                 «Английский язык. Дидактические материалы для обучающихся 1 курсов колледжа»
                 (сборник упражнений, карточек и заданий)
             </p>
@@ -59,9 +55,7 @@
     
             <h2>Введение</h2>
             <p>
-                Сборник дидактических материалов по английскому языку для студентов 1 курса подготовлен в соответствии с
-                рабочей учебной
-                программой (РУП) колледжа на 2025–2026 учебный год. Он предназначен для использования преподавателями и
+                Сборник дидактических материалов по английскому языку предназначен для использования преподавателями и
                 студентами в
                 учебном процессе и отражает современные методические подходы к обучению иностранному языку на уровне
                 начальной
@@ -372,7 +366,7 @@
             </div>
             <div class="block-title">
                 <p> 3&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p class="title_theme">Discussing Coptroversial Issues</p>
+                <p class="title_theme">Discussing Controversial Issues</p>
             </div>
         </div>
         <div class="block" id="task_4">
@@ -575,11 +569,10 @@
         <div class="panel-content">
             <img id="panelImage" src="" alt="">
             <h2 id="panelTitle"></h2>
-            <p id="panelDescription">
-                Здесь будет описание. Пока это заглушка.
-            </p>
+            <p id="panelDescription"></p>
     
             <button class="panel-btn">Приступить</button>
+            <button class="close-btn">Закрыть</button>
         </div>
     </div>
 
@@ -644,47 +637,99 @@
 
         const panelImg = document.getElementById('panelImage');
         const panelTitle = document.getElementById('panelTitle');
+        const panelDescription = document.getElementById('panelDescription');
         const panelBtn = document.querySelector('.panel-btn');
+        const closeBtn = document.querySelector('.close-btn');
 
-        let currentBlockId = ''; // для хранения текущего id
+        let currentBlockId = '';
+        let themesData = {};
 
-        blockss.forEach(block => {
-                block.addEventListener('click', () => {
-
-                    // берём данные из блока
-                    const img = block.querySelector('img').src;
-
-                    // берём только <p> с классом title_theme
-                    const titleElem = block.querySelector('.title_theme');
-                    const title = titleElem ? titleElem.innerText : '';
-
-                    const id = block.id; // сохраняем id блока
-                    currentBlockId = id;
-
-                    // вставляем в панель
-                    panelImg.src = img;
-                    panelTitle.innerText = title;
-
-                    // подсветка блока
-                    blockss.forEach(b => b.classList.remove('active'));
-                    block.classList.add('active');
-
-                    // открываем панель
-                    panel.classList.add('active');
-
-                    // сдвигаем сетку
-                    document.querySelector('.blocks-grid').classList.add('shift-right');
-                });
+        // Загружаем JSON
+        fetch('JS/messages.json')
+            .then(res => res.json())
+            .then(data => {
+                themesData = data;
+            })
+            .catch(err => {
+                console.error('Ошибка загрузки JSON:', err);
             });
 
-            // перенаправление при клике на кнопку
-            panelBtn.addEventListener('click', () => {
+        blockss.forEach(block => {
+            block.addEventListener('click', () => {
+
+                const img = block.querySelector('img').src;
+
+                const titleElem = block.querySelector('.title_theme');
+                const title = titleElem ? titleElem.innerText : '';
+
+                const id = block.id;
+                currentBlockId = id;
+
+                // Получаем описание
+                let description = 'Loading...';
+                if (themesData[id]) {
+                    description = themesData[id].description;
+                }
+
+                // Вставляем в панель
+                panelImg.src = img;
+                panelTitle.innerText = title;
+                panelDescription.innerText = description;
+
+                // Подсветка блока
+                blockss.forEach(b => b.classList.remove('active'));
+                block.classList.add('active');
+
+                // Открываем панель
+                panel.classList.add('active');
+
+                // Сдвигаем сетку
+                document.querySelector('.blocks-grid').classList.add('shift-right');
+            });
+        });
+
+        // Кнопка перехода
+        panelBtn.addEventListener('click', () => {
+            if (currentBlockId) {
+                window.location.href = "HTML/" + currentBlockId + '.html';
+            }
+        });
+
+        panelBtn.addEventListener('click', () => {
                 if (currentBlockId) {
                     window.location.href = "HTML/" + currentBlockId + '.html';
                 }
             });
+        
+        // Кнопка закрытия
+        closeBtn.addEventListener('click', () => {
+            panel.classList.remove('active');
+            document.querySelector('.blocks-grid').classList.remove('shift-right');
+            blockss.forEach(b => b.classList.remove('active'));
+        });
+    </script>
+
+
+    <script>
+        const grids = document.querySelector('.blocks-grid');
+        const panels = document.getElementById('sidePanel');
+
+        function controlPanelPosition() {
+            const rect = grids.getBoundingClientRect();
+
+                // если сетка ниже верха экрана → панель идёт за ней
+            if (rect.top > 20) {
+                panels.style.top = rect.top + 'px';
+            } else {
+                    // если уже доскроллили → фиксируем сверху
+                panels.style.top = '20px';
+            }
+        }
+
+        window.addEventListener('scroll', controlPanelPosition);
+        window.addEventListener('resize', controlPanelPosition);
+        window.addEventListener('load', controlPanelPosition);
     </script>
 
 </body>
-
 </html>

@@ -243,28 +243,6 @@ nav a:hover::after {
 
 
 
-.number {
-    position: absolute;
-    top: 10px;
-    right: 15px;
 
-    width: 25px;
-    height: 25px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    border-radius: 50%;
-    background: rgb(0, 0, 0);
-
-    font-size: 16px;
-    color: #e7c500;
-
-    cursor: pointer;
-
-    transition: transform 0.4s ease, 
-                background 0.3s ease, 
-                color 0.3s ease,
-                box-shadow 0.3s ease;
-}
