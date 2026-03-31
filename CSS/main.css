@@ -120,7 +120,83 @@ nav a:hover::after {
 
 
 
+.blocks-grid {
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(6, 170px);
+    grid-template-rows: repeat(4, 250px);
+    gap: 12px 20px;
+    justify-content: center;
+    padding-right: 100px;
+    margin: 10px 0;
 
+    transition: transform 0.35s ease;
+}
+
+.blocks-grid.shift-right {
+    justify-content: end;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: rgba(5, 17, 29, 0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.block.active {
+    box-shadow:
+        0 0 20px rgba(255, 221, 87, 0.85),
+        0 0 45px rgba(255, 221, 87, 0.45),
+        0 4px 10px rgba(0,0,0,0.35);
+    background-color: rgba(255, 221, 87, 0.12);
+    transform: scale(1.03);
+}
+
+/* верхняя часть (картинка) */
+.block-image {
+    height: 70%; /* или 75% — регулируешь сам */
+}
+
+.block-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ключевая строка */
+}
+
+/* нижняя часть (текст) */
+.block-title {
+    height: 30%; /* остаток */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+}
+
+.block-title p {
+    margin: 0;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.block:hover {
+    transform: scale(1.05); 
+    background-color: #55c6ff6b;
+    backdrop-filter: blur(12px);
+}
 
 
 
@@ -161,4 +237,34 @@ nav a:hover::after {
 .hero-image img {
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+
+
+
+
+.number {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: rgb(0, 0, 0);
+
+    font-size: 16px;
+    color: #e7c500;
+
+    cursor: pointer;
+
+    transition: transform 0.4s ease, 
+                background 0.3s ease, 
+                color 0.3s ease,
+                box-shadow 0.3s ease;
 }
