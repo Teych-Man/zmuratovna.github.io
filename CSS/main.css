@@ -241,10 +241,12 @@ nav a:hover::after {
 
 
 
+
+
 /* =========================
    TABLET (<= 1024px)
 ========================= */
-@media (max-width: 1131px) {
+@media (max-width: 1200px) {
 
     .hero {
         flex-direction: column;
