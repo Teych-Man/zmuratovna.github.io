@@ -241,7 +241,128 @@ nav a:hover::after {
 
 
 
+/* =========================
+   TABLET (<= 1024px)
+========================= */
+@media (max-width: 1031px) {
 
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 40px;
+    }
+
+    .hero-image img {
+        width: 300px;
+    }
+
+    .blocks-grid {
+        grid-template-columns: repeat(3, 1fr);
+        padding-right: 20px;
+        justify-content: center;
+    }
+
+    .blocks-grid.shift-right {
+        justify-content: center; /* отключаем увод вправо */
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+}
+
+
+/* =========================
+   MOBILE (<= 768px)
+========================= */
+@media (max-width: 768px) {
+
+    body {
+        padding-top: 70px;
+    }
+
+    .header {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 15px;
+    }
+
+    .logo {
+        font-size: 13px;
+    }
+
+    .sub-logo {
+        font-size: 12px;
+    }
+
+    nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 40px 20px;
+    }
+
+    .hero-text h1 {
+        font-size: 22px;
+    }
+
+    .hero-text p {
+        font-size: 14px;
+    }
+
+    .hero-image img {
+        width: 250px;
+    }
+
+    .blocks-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .block-title p {
+        font-size: 12px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE (<= 480px)
+========================= */
+@media (max-width: 480px) {
+
+    .blocks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-text h1 {
+        font-size: 18px;
+    }
+
+    .hero-text p {
+        font-size: 13px;
+    }
+
+    .hero-image img {
+        width: 200px;
+    }
+
+    .block {
+        height: auto;
+    }
+}
 
 
 
